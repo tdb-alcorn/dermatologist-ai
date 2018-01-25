@@ -46,7 +46,7 @@ def plot_roc_auc(y_true, y_pred):
     for i in range(3):
         print('Category {d} Score: {f:.3f}'. format(d=i+1, f=roc_auc[i]))
 
-def plot_confusion_matrix(y_true, y_pred, thresh, classes):
+def plot_confusion_matrix(y_true, y_pred, thresh, classes=['benign', 'malignant']):
     """
     This function plots the (normalized) confusion matrix.
     """
@@ -77,6 +77,13 @@ def plot_confusion_matrix(y_true, y_pred, thresh, classes):
     plt.xlabel('Predicted label')
     plt.show()
 
+def get_ground_truth():
+    # get ground truth labels for test dataset
+    truth = pd.read_csv('ground_truth.csv')
+    y_true = truth.as_matrix(columns=["task_1", "task_2"])
+    return y_true
+
+    
 if __name__ == "__main__":
 
     preds_path = sys.argv[1]
